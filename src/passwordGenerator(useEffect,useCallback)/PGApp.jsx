@@ -5,6 +5,7 @@ const PGApp = () => {
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
+  const [copiedMsg, setCopiedMsg] = useState(false);
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
@@ -26,7 +27,25 @@ const PGApp = () => {
   // bcuz react will not let you directly call the function openly like we do in js either you need an eventhandling to fire it or you need useEffect
 
   // useRef hook
-  const passwordRef = useRef(null)
+  const passwordRef = useRef(null);
+  // or it would be null unless we don't pass it as a value to a property named "ref" to any target
+  // useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue)
+
+  const copyPasswordToClipboard = useCallback(() => {
+    // passwordRef.current.select()
+    // console.log(passwordRef)
+    //{current: input#password.rounded.w-full.h-full.outline-none.border-none.px-2.text-gray-800}
+    // console.log(passwordRef.current)
+    //<input type="text" name="password" id="password" placeholder="Password" class="rounded w-full h-full outline-none border-none px-2 text-gray-800" readonly="" value="uqoxxokm">
+    passwordRef.current?.select();
+    // passwordRef.current?.setSelectionRange(0, 5);
+    //if current is not null
+    window.navigator.clipboard.writeText(password);
+    setCopiedMsg(true);
+    setTimeout(() => {
+      setCopiedMsg(false);
+    }, 3000);
+  }, [password]);
 
   useEffect(() => {
     passwordGenerator();
@@ -45,9 +64,16 @@ const PGApp = () => {
             className="rounded w-full h-full outline-none border-none px-2 text-gray-800"
             value={password}
             readOnly
+            ref={passwordRef}
+            // if we don't pass any reference to not even a single target then it would consider the default value passed to the useRef Hook
+            // so as soon we pass the value to ref property of a target we want to link then the passwordRef will be assigned to passwordRef.current property as a object/node/element
+            // Once the component unmounts, React will set ref.current to null
           />
-          <button className="bg-blue-600 h-full px-5 rounded hover:bg-blue-700 transition-all">
-            Copy
+          <button
+            className="bg-blue-600 h-full px-5 rounded hover:bg-blue-700 transition-all"
+            onClick={copyPasswordToClipboard}
+          >
+            {copiedMsg ? "copied!" : "copy"}
           </button>
         </div>
         <div className="flex items-center gap-2">
