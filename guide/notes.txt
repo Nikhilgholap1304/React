@@ -1,0 +1,17 @@
+Virtual Dom was react's own tree
+
+Hidration is the process of injecting the javascript in to an web template.
+
+The fibre is an algorithm which updates the virtual dom.
+
+Reconciliation is an algorithm behind virtual dom.
+
+Reconciliation is the algorithm behind what is popularly understood as the "virtual DOM." A high-level description goes something like this: when you render a React application, a tree of nodes that describes the app is generated and saved in memory. This tree is then flushed to the rendering environment — for example, in the case of a browser application, it's translated to a set of DOM operations. When the app is updated (usually via setState), a new tree is generated. The new tree is diffed with the previous tree to compute which operations are needed to update the rendered app.
+
+  In simpler words - Reconcilation is an algorthm which is used to mount the virtual dom.
+Whenever state has changed it generates new tree and will only try to modify the dom according to the difference it finds between browsers DOM and reacts virtual DOM and not the entire of browsers DOM like github commits and changes.
+Hence react is pretty much optimized because it selectively update the changes not the entire DOM via virtual DOM.
+
+DOM is nothing but one of the rendering environments react can render to 
+
+Props makes the component reusable
