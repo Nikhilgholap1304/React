@@ -2,7 +2,8 @@ import LifeCycleClasses from "./LifeCycleClasses";
 import LifeCycleFunction from "./LifeCycleFunction";
 import Props from "./Props";
 import InterViewQue1 from "./InterViewQue1";
-import BgHome from "./bgChanger/BgHome"
+import BgHome from "./bgChanger/BgHome";
+import PGApp from "./passwordGenerator(useEffect,useCallback)/PGApp.jsx";
 function App() {
   const username = "Nikhil";
   return (
@@ -18,7 +19,8 @@ function App() {
       {/* this is an expression especially evaluated expression and to be kept in mind that only outcome or resultant thing should be included */}
       {/* <Props /> */}
       {/* <InterViewQue1/> */}
-      <BgHome/>
+      {/* <BgHome/> */}
+      <PGApp />
     </>
   );
 }
